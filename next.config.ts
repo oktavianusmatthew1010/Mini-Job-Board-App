@@ -1,27 +1,28 @@
-// next.config.ts
-import type { NextConfig } from 'next'
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  swcMinify: true, 
+  
   images: {
     domains: [
-      'https://krnxnqgtplepjvgcmrvv.supabase.co', // Supabase storage domain
-      'lh3.googleusercontent.com' // If using Google auth
+      'krnxnqgtplepjvgcmrvv.supabase.co', 
+      'lh3.googleusercontent.com',
     ],
   },
-  // Enable SWC minification (recommended by Vercel)
-  swcMinify: true,
-  // Output standalone for better performance (optional)
+
+  // Optional: Output standalone build for Docker/Vercel serverless
   output: process.env.NODE_ENV === 'production' ? 'standalone' : undefined,
-  // Enable React compiler if using (optional)
+
   experimental: {
+    // Optional React Compiler (only if using React 19+ with @react/compiler)
     reactCompiler: process.env.NODE_ENV === 'production',
   },
-  // Environment variables that should be available at build time
+
   env: {
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
     NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-  }
-}
+  },
+};
 
-export default nextConfig
+export default nextConfig;
