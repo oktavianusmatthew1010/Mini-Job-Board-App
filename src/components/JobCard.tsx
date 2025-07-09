@@ -1,5 +1,5 @@
-import Link from 'next/link'
-import { Job } from '../lib/types'
+import Link from "next/link";
+import { Job } from "../lib/types";
 
 export default function JobCard({ job }: { job: Job }) {
   return (
@@ -26,5 +26,5 @@ export default function JobCard({ job }: { job: Job }) {
         </div>
       </div>
     </div>
-  )
+  );
 }

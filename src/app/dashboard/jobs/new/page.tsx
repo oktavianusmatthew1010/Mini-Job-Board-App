@@ -1,5 +1,5 @@
 // app/jobs/new/page.tsx
-import JobForm from '../../../../components/JobForm';
+import JobForm from "../../../../components/JobForm";
 
 export default function NewJobPage() {
   // This is a Server Component - no Supabase client here

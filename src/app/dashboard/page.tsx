@@ -1,18 +1,18 @@
-import { createClient } from '../../lib/superbase'
-import Link from 'next/link'
-import JobCard from '@/components/JobCard'
+import { createClient } from "../../lib/superbase";
+import Link from "next/link";
+import JobCard from "@/components/JobCard";
 
 export default async function DashboardPage() {
-  const supabase = createClient()
+  const supabase = createClient();
   const {
     data: { user },
-  } = await supabase.auth.getUser()
+  } = await supabase.auth.getUser();
 
   const { data: jobs } = await supabase
-    .from('jobs')
-    .select('*')
-    .eq('user_id', user?.id)
-    .order('created_at', { ascending: false })
+    .from("jobs")
+    .select("*")
+    .eq("user_id", user?.id)
+    .order("created_at", { ascending: false });
 
   return (
     <div>
@@ -43,10 +43,10 @@ export default async function DashboardPage() {
           ))
         ) : (
           <div className="text-center py-12">
-            <p className="text-gray-500">You haven't posted any jobs yet.</p>
+            <p className="text-gray-500">You havent posted any jobs yet.</p>
           </div>
         )}
       </div>
     </div>
-  )
+  );
 }

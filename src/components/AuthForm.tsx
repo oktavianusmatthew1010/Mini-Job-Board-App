@@ -1,43 +1,43 @@
-'use client'
+"use client";
 
-import { createClient } from '../lib/superbase'
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { createClient } from "../lib/superbase";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
-export default function AuthForm({ type }: { type: 'login' | 'signup' }) {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
-  const [loading, setLoading] = useState(false)
-  const router = useRouter()
-  const supabase = createClient()
+export default function AuthForm({ type }: { type: "login" | "signup" }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const supabase = createClient();
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    setError('')
+    e.preventDefault();
+    setLoading(true);
+    setError("");
 
     try {
-      if (type === 'login') {
+      if (type === "login") {
         const { error } = await supabase.auth.signInWithPassword({
           email,
           password,
-        })
-        if (error) throw error
+        });
+        if (error) throw error;
       } else {
         const { error } = await supabase.auth.signUp({
           email,
           password,
-        })
-        if (error) throw error
+        });
+        if (error) throw error;
       }
-      router.refresh()
+      router.refresh();
     } catch (error) {
-      setError(error instanceof Error ? error.message : 'An error occurred')
+      setError(error instanceof Error ? error.message : "An error occurred");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
@@ -73,8 +73,8 @@ export default function AuthForm({ type }: { type: 'login' | 'signup' }) {
         disabled={loading}
         className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
       >
-        {loading ? 'Processing...' : type === 'login' ? 'Login' : 'Sign Up'}
+        {loading ? "Processing..." : type === "login" ? "Login" : "Sign Up"}
       </button>
     </form>
-  )
+  );
 }

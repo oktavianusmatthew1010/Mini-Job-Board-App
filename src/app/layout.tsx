@@ -1,18 +1,18 @@
-import './globals.css'
-import { Inter } from 'next/font/google'
-import Navbar from '../components/NavBar'
+import "./globals.css";
+import { Inter } from "next/font/google";
+import Navbar from "../components/NavBar";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: 'Mini Job Board',
-  description: 'Find your next job opportunity',
-}
+  title: "Mini Job Board",
+  description: "Find your next job opportunity",
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -21,5 +21,5 @@ export default function RootLayout({
         <main className="container mx-auto px-4 py-8">{children}</main>
       </body>
     </html>
-  )
+  );
 }

@@ -1,19 +1,15 @@
-import { createClient } from '../../lib/superbase'
-import { redirect } from 'next/navigation'
+import { createClient } from "../../lib/superbase";
+
 
 export default async function DashboardLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
-  const supabase = createClient()
+  const supabase = createClient();
   const {
-    data: { user },
-  } = await supabase.auth.getUser()
+    data: { },
+  } = await supabase.auth.getUser();
 
-  // if (!user) {
-  //   redirect('/login')
-  // }
-
-  return <>{children}</>
+  return <>{children}</>;
 }

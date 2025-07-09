@@ -1,5 +1,5 @@
-import AuthForm from '@/components/AuthForm'
-import Link from 'next/link'
+import AuthForm from "@/components/AuthForm";
+import Link from "next/link";
 
 export default function SignupPage() {
   return (
@@ -10,7 +10,7 @@ export default function SignupPage() {
             Create a new account
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
-            Or{' '}
+            Or{" "}
             <Link
               href="/login"
               className="font-medium text-indigo-600 hover:text-indigo-500"
@@ -22,5 +22,5 @@ export default function SignupPage() {
         <AuthForm type="signup" />
       </div>
     </div>
-  )
+  );
 }

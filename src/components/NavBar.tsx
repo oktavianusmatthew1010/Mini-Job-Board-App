@@ -1,40 +1,41 @@
-'use client'
+"use client";
 
-import { createClient } from '../lib/superbase'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { createClient } from "../lib/superbase";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import type { Session } from "@supabase/supabase-js";
 
 export default function Navbar() {
-  const [user, setUser] = useState<any>(null)
-  const supabase = createClient()
-  const router = useRouter()
+  const [user, setUser] = useState<Session["user"] | null>(null);
+  const supabase = createClient();
+  const router = useRouter();
 
   useEffect(() => {
     const getUser = async () => {
       const {
         data: { user },
-      } = await supabase.auth.getUser()
-      setUser(user)
-    }
+      } = await supabase.auth.getUser();
+      setUser(user);
+    };
 
-    getUser()
+    getUser();
 
     const { data: authListener } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        setUser(session?.user ?? null)
+      async (_event, session) => {
+        setUser(session?.user ?? null);
       }
-    )
+    );
 
     return () => {
-      authListener.subscription.unsubscribe()
-    }
-  }, [])
+      authListener?.subscription?.unsubscribe?.();
+    };
+  }, [supabase]);
 
   const handleLogout = async () => {
-    await supabase.auth.signOut()
-    router.refresh()
-  }
+    await supabase.auth.signOut();
+    router.refresh();
+  };
 
   return (
     <nav className="bg-white shadow-sm">
@@ -89,5 +90,5 @@ export default function Navbar() {
         </div>
       </div>
     </nav>
-  )
+  );
 }

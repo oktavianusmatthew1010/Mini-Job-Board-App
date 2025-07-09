@@ -1,37 +1,40 @@
 // src/components/JobFilter.tsx
-'use client'
+"use client";
 
-import { useRouter, useSearchParams } from 'next/navigation'
-import { jobTypes, locations } from '@/lib/constants'
+import { useRouter, useSearchParams } from "next/navigation";
+import { jobTypes, locations } from "@/lib/constants";
 
 export default function JobFilter({
-  initialJobType = '',
-  initialLocation = ''
+  initialJobType = "",
+  initialLocation = "",
 }: {
-  initialJobType?: string
-  initialLocation?: string
+  initialJobType?: string;
+  initialLocation?: string;
 }) {
-  const router = useRouter()
-  const searchParams = useSearchParams()
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
   const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const { name, value } = e.target
-    const params = new URLSearchParams(searchParams.toString())
-    
+    const { name, value } = e.target;
+    const params = new URLSearchParams(searchParams.toString());
+
     if (value) {
-      params.set(name, value)
+      params.set(name, value);
     } else {
-      params.delete(name)
+      params.delete(name);
     }
-    
-    router.push(`/?${params.toString()}`)
-  }
+
+    router.push(`/?${params.toString()}`);
+  };
 
   return (
     <div className="bg-white p-4 rounded-lg shadow-md mb-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="location" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="location"
+            className="block text-sm font-medium text-gray-700"
+          >
             Location
           </label>
           <select
@@ -50,7 +53,10 @@ export default function JobFilter({
           </select>
         </div>
         <div>
-          <label htmlFor="job_type" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="job_type"
+            className="block text-sm font-medium text-gray-700"
+          >
             Job Type
           </label>
           <select
@@ -70,5 +76,5 @@ export default function JobFilter({
         </div>
       </div>
     </div>
-  )
+  );
 }
